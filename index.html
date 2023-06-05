@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    width: 100%;
+    height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(148, 116, 179);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.player1{
+    width: 45%;
+    height: 90vh;
+    background-color: rgb(4, 109, 4);
+}
+.player2{
+    width: 45%;
+    height: 90vh;
+    background-color: rgb(62, 170, 80);
+}
+.player1 h1{
+    font-weight: lighter;
+    color: whitesmoke;
+    font-size: 50px;
+    padding-top: 90px;
+    text-align: center;
+}
+.player2 h1{
+    font-weight: lighter;
+    color: whitesmoke;
+    font-size: 50px;
+    padding-top: 30px;
+    text-align: center;
+    /* position: relative; */
+}
+.player2 p{
+    text-align: center;
+    color: #c23a3a;
+    font-weight: bold;
+    padding-top:30px;
+    font-size: 30px;
+}
+.container h2{
+    text-align: center;
+    padding: 50px 50px;
+    font-size: 60px;
+    font-weight: lighter;
+    color: rgb(29, 83, 7);
+}
+.box1{
+    width: 100px;
+    height: 80px;
+    background-color: rgba(98, 118, 231, 0.541);
+    text-align: center;
+    font-size: 20px;
+    align-items: center;
+    position: absolute;
+    
+    left: 24%;
+}
+.box2{
+    width: 100px;
+    height: 80px;
+    background-color: rgb(121, 122, 226);
+    text-align: center;
+    font-size: 20px;
+    align-items: center;
+    position: absolute;
+    
+    right: 24%;
+}
+.new-btn{
+  border: none;
+  font-size: 25px;
+  font-weight: lighter;
+  position: absolute;
+  left: 46%;
+  top: 15%;
+  background-color: transparent;
+  color: aliceblue;
+  cursor: pointer;
+
+}
+.roll-btn{
+    border: none;
+    font-size: 25px;
+    font-weight: lighter;
+    position: absolute;
+    left: 46%;
+    bottom: 30%;
+    background-color: transparent;
+    color: aliceblue;
+    cursor: pointer;
+}
+.hold-btn{
+    border: none;
+    font-size: 25px;
+    font-weight: lighter;
+    position: absolute;
+    left: 46%;
+    bottom: 20%;
+    background-color: transparent;
+    color: aliceblue;
+}
+.max{
+    width: 200px;
+    height: 50px;
+    background-color:blue;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    left: 43%;
+    bottom: 10%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+
+}
+.score{
+    width: 60px;
+    height: 25px;
+
+    
+
+}
+</style>
+<body>
+    <div class="container">
+        <button class="new-btn"  onclick="newgame()">New Game</button>
+        <button class="roll-btn" onclick="rollDice()">Roll A Dice</button>
+        <button class="hold-btn">Hold  Score </button>
+        <div class="max">
+            Max score
+            <div class="score"></div>
+        </div>
+        <div class="player1">
+            <h1 id="p1">Player 1</h1>
+            <h2 id="score-1"></h2>
+        <div class="box1" id="add1">Current
+            <p></p>
+        </div>
+        </div>
+        <div class="player2">
+            <p></p>
+            <h1 id="Player2">Player 2 </h1>
+            <h2 id="score-2"></h2>
+            <div class="box2" id="add2">Current
+        </div>
+    </div>
+</body>
+<script>
+    var turn = "player1";
+
+    var player1={
+        name : "player1 ",
+        total :0
+    }
+    var player2={
+        name : "player2 ",
+        total :0
+    }
+    function rollDice(){
+        var dice1;
+        var dice2;
+         document.getElementById("score-1").innerHTML= player1.total;
+        document.getElementById("score-2").innerHTML= player2.total;
+        if (turn === "player1"){
+            dice1 = Math.floor(Math.random()*6)+1;
+            document.getElementById("add1").innerHTML=dice1;
+        
+        if (dice1 === 1){
+            return turn= "player2"
+        }
+        if (player1.total >= 50){
+            alert( "player1 WINS!!") 
+            return player1.total = 0 ,player2.total= 0
+        }
+
+        return player1.total = player1.total + dice1;
+        
+    }else if (turn === "player2"){
+            dice2 = Math.floor(Math.random()*6)+1;
+            document.getElementById("add2").innerHTML=dice2;
+         
+        if (dice2 === 1){
+            return turn= "player1"
+        }
+        if (player2.total >= 50){
+            alert( "player2 WINS!!")
+        }return player1.total = 0 ,player2.total= 0
+        return player2.total = player2.total + dice2;
+        // promise = new Promise(function(resolve, reject)
+        //  { resolve("if.alert")
+        //  return player1.total = 0 ,player2.total= 0
+        //  ; 
+        //     //reject(new (''));
+        // })
+
+
+
+// (alert).click(function(){
+//      var id = $(alert).attr("player1.total","player2.total");
+// })
+    }
+ 
+
+        else{
+            return turn = "player1"
+        }
+    
+    }
+// oo ki chaddi
+
+// function newgame(){
+
+// }
+// newgame.onclick = function () {
+//   alert("Button is clicked");
+// };
+
+   
+</script>
+</html>
